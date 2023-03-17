@@ -6,7 +6,7 @@
  * main - Prints a random number, positive or negative or zero.
  * Return: Always 0
  */
-int main()
+int main(voivoidd)
 {
 	srand(time(0));
 	int n;
