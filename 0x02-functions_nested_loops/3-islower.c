@@ -1,4 +1,4 @@
-#include "main"
+#include "main.h"
 /**
  * _islower - Entry point
  * Return: 1
