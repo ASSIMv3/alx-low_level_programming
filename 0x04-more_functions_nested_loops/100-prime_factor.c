@@ -6,16 +6,15 @@
  */
 int main(void)
 {
-	long i, j;
-
-	i = 612852475143;
-	for (j = 2; j < i; j++)
+	long int num = 612852475143;
+	long int i;
+	for (i = 2; i <num; i++)
 	{
-		while (i % i == 0)
-			i =  / i;
+		while (num % i == 0)
+			num = num / i;
 	}
 
-	printf("%lu\n", i);
+	printf("%lu\n", num);
 
 	return (0);
 }
