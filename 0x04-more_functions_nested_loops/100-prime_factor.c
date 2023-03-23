@@ -6,10 +6,10 @@
  */
 int main(void)
 {
-	long int num = 612852475143;
-	long int i;
+	long num, i;
 
-	for (i = 2; i <num; i++)
+	num = 612852475143;
+	for (i = 2; i < num; i++)
 	{
 		while (num % i == 0)
 			num = num / i;
