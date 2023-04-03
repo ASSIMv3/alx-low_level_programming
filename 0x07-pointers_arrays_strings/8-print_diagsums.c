@@ -19,3 +19,4 @@ void print_diagsums(int *a, int size)
 		s2 += *(a + i * size + (size - i - 1));
 	}
 	printf("%d, %d\n", s1, s2);
+}
