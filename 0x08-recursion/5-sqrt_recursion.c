@@ -1,9 +1,10 @@
 #include "main.h"
 
 /**
- * _sqrt_recursion - returns the square root of a number
- * @n: square root
+ * _sqrt_root - returns the square root of a number
+ * @n: int
  * @i: number
+ * @r: square root
  * Return: square root
  */
 int _sqrt_root(int i, int n, int r)
@@ -22,7 +23,7 @@ int _sqrt_root(int i, int n, int r)
 }
 /**
  * _sqrt_recursion - returns the natural square root of a number
- * @n: number
+ * @n: int
  * Return: square root
  */
 int _sqrt_recursion(int n)
