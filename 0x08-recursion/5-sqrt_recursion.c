@@ -6,17 +6,23 @@
  * @i: number
  * Return: square root
  */
-int _sqrt_root(int n, int i)
+int _sqrt_root(int i, int n, int r)
 {
-	if (i * i > n)
-		return (-1);
-	if (i * i == n)
-		return (i);
-	return (_sqrt_root(n, i + 1));
+	n = n - i;
+	if (n > 0)
+	{
+		r += 1;
+		i += 2;
+		return (_sqrt_root(i, n, r));
+	} else if (n == 0)
+	{
+		return (r += 1);
+	}
+	return (-1);
 }
 /**
  * _sqrt_recursion - returns the natural square root of a number
- * @n: number 
+ * @n: number
  * Return: square root
  */
 int _sqrt_recursion(int n)
