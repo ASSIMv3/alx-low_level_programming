@@ -22,11 +22,11 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 	{
 		return (NULL);
 	}
-
-	for (i = 0; i < nmemb * size; i++)
+	i = 0;
+	while (i < (nmemb * size))
 	{
-		*((char *) ptr + (i * size)) = 0;
+		ptr[i] = 0;
+		i++;
 	}
-
 	return (ptr);
 }
