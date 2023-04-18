@@ -3,51 +3,48 @@
 #include "dog.h"
 
 /**
- * new_dog - create a new dog
- * @name: the name of the dog
- * @age: the age of the dog
- * @owner: the owner of the dog
- * Return: pointer to the new dog struct
+ * new_dog - creates a new dog
+ * @name: name of the dog
+ * @age: age of the dog
+ * @owner: owner of the dog
+ * Return: pointer to the new dog
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	if (name == NULL || owner == NULL)
+	dog_t *dog;
+	size_t len1, len2;
+	unsigned int i;
+
+	len1 = strlen(name);
+	len2 = strlen(owner);
+
+	dog = malloc(sizeof(dog_t));
+	if (dog == NULL)
 		return (NULL);
 
-	dog_t *new_dog = malloc(sizeof(dog_t));
-
-	if (new_dog == NULL)
-		return (NULL);
-
-	int name_len = 0, owner_len = 0;
-	char *name_copy, *owner_copy;
-
-	while (name[name_len] != '\0')
-		name_len++;
-	while (owner[owner_len] != '\0')
-		owner_len++;
-
-	name_copy = malloc(sizeof(char) * (name_len + 1));
-	owner_copy = malloc(sizeof(char) * (owner_len + 1));
-
-	if (name_copy == NULL || owner_copy == NULL)
+	dog->name = malloc(sizeof(char) * (len1 + 1));
+	if (dog->name == NULL)
 	{
-		free(name_copy);
-		free(owner_copy);
-		free(new_dog);
+		free(dog);
 		return (NULL);
 	}
 
-	for (int i = 0; i < name_len; i++)
-		name_copy[i] = name[i];
-	name_copy[name_len] = '\0';
-	for (int i = 0; i < owner_len; i++)
-		owner_copy[i] = owner[i];
-	owner_copy[owner_len] = '\0';
+	for (i = 0; i <= len1; i++)
+		dog->name[i] = name[i];
 
-	new_dog->name = name_copy;
-	new_dog->age = age;
-	new_dog->owner = owner_copy;
+	dog->owner = malloc(sizeof(char) * (len2 + 1));
+	if (dog->owner == NULL)
+	{
+		free(dog->name);
+		free(dog);
+		return (NULL);
+	}
 
-	return (new_dog);
+	for (i = 0; i <= len2; i++)
+		dog->owner[i] = owner[i];
+
+	dog->age = age;
+
+	return (dog);
 }
+
