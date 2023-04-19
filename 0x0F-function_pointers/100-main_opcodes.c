@@ -6,28 +6,33 @@
  * @argv: arg vector
  * Return: 0
  */
-void print_opcodes(int num_bytes)
-{
-	char *ptr = (char *) &print_opcodes;
-	
-	for (int i = 0; i < num_bytes; i++)
-		printf("%02x ", ptr[i] & 0xff);
-	printf("\n");
-}
 int main(int argc, char *argv[])
 {
+	int num_bytes, i;
+	char *ptr;
+
 	if (argc != 2)
 	{
 		printf("Error\n");
-		return (1);
+		exit(1);
 	}
-	int num_bytes = atoi(argv[1]);
 
+	num_bytes = atoi(argv[1]);
 	if (num_bytes < 0)
 	{
 		printf("Error\n");
-		return (2);
+		exit(2);
 	}
-	print_opcodes(num_bytes);
+
+	ptr = (char *)main;
+	for (i = 0; i < num_bytes; i++)
+	{
+		if (i == (num_bytes - 1))
+		{
+			printf("%02x\n", ptr[i]);
+			break;
+		}
+		printf("%02x ", ptr[i]);
+	}
 	return (0);
 }
