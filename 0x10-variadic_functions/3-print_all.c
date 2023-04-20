@@ -2,6 +2,16 @@
 #include <stdarg.h>
 #include <stdio.h>
 /**
+ * struct print_fn - Struct print_fn
+ * @type: The format specifier
+ * @print: print the corresponding argument
+ */
+typedef struct print_fn
+{
+	char type;
+	void (*print)(va_list);
+} print_fn_t;
+/**
 * print_all -  prints anything
 * @format: list of types of arguments passed to the function
 * return : void
