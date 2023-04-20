@@ -1,33 +1,21 @@
 #include "variadic_functions.h"
 #include <stdio.h>
 #include <stdarg.h>
-
-/**
- * struct printer - struct printer
- * @symb: the symbol of the format type
- * @print: a function pointer
- */
-typedef struct printer
-{
-	char *symb;
-	void (*print)(char *separator, va_list args);
-} print_t;
-
 /**
  * print_all - prints anything
- * @format: a list of types of arguments
+ * @format: list of args
  */
 void print_all(const char * const format, ...)
 {
 	va_list args;
-	print_t types[] = {
-		{ "c", print_achar },
-		{ "i", print_anint },
-		{ "f", print_afloat },
-		{ "s", print_astr }
+	print_fn_t types[] = {
+		{ "c", print__char },
+		{ "i", print__int },
+		{ "f", print__float },
+		{ "s", print__str }
 	};
 	unsigned int i, j;
-	char *sep = "";
+	char *s = "";
 
 	va_start(args, format);
 	i = 0;
@@ -36,10 +24,10 @@ void print_all(const char * const format, ...)
 		j = 0;
 		while (j < 4)
 		{
-			if (format[i] == *types[j].symb)
+			if (format[i] == *types[j].type)
 			{
-				types[j].print(sep, args);
-				sep = ", ";
+				types[j].print(s, args);
+				s = ", ";
 			}
 			j++;
 		}
@@ -50,53 +38,41 @@ void print_all(const char * const format, ...)
 }
 
 /**
- * print_achar - a function that prints a character
- *
- * @separator: a separator of the character
- * @args: list of arguments
- *
- * Return: void
+ * print__char - prints a char
+ * @separator: sep of char
+ * @args: list of args
  */
-void print_achar(char *separator, va_list args)
+void print__char(char *separator, va_list args)
 {
 	printf("%s%c", separator, va_arg(args, int));
 }
 
 /**
- * print_anint - a function that prints an integer
- *
- * @separator: a separator for the int
- * @args: list of arguments
- *
- * Return: void
+ * print__int - prints an int
+ * @separator: sep of int
+ * @args: list of args
  */
-void print_anint(char *separator, va_list args)
+void print__int(char *separator, va_list args)
 {
 	printf("%s%i", separator, va_arg(args, int));
 }
 
 /**
- * print_afloat - a function that prints a float
- *
- * @separator: a separator for the float
+ * print__float - prints a float
+ * @separator: sep float
  * @args: list of arguments
- *
- * Return: void
  */
-void print_afloat(char *separator, va_list args)
+void print__float(char *separator, va_list args)
 {
 	printf("%s%f", separator, va_arg(args, double));
 }
 
 /**
- * print_astr - a function that prints a string
- *
- * @separator: a separator for the string
- * @args: list of arguments
- *
- * Return: void
+ * print__str - prints a string
+ * @separator: sep of str
+ * @args: list of args
  */
-void print_astr(char *separator, va_list args)
+void print__str(char *separator, va_list args)
 {
 	char *str = va_arg(args, char *);
 
