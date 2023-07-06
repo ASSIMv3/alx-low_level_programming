@@ -47,9 +47,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 
 	if (ht == NULL || key == NULL || value == NULL)
 		return (0);
-
 	index = key_index((const unsigned char *)key, ht->size);
-
 	node = ht->array[index];
 	while (node != NULL)
 	{
@@ -61,18 +59,15 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		}
 		node = node->next;
 	}
-
 	node = malloc(sizeof(shash_node_t));
 	if (node == NULL)
 		return (0);
-
 	node->key = strdup(key);
 	node->value = strdup(value);
 	node->next = ht->array[index];
 	node->sprev = NULL;
 	node->snext = NULL;
 	ht->array[index] = node;
-
 	if (ht->shead == NULL || strcmp(key, ht->shead->key) < 0)
 	{
 		node->snext = ht->shead;
@@ -87,22 +82,20 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		temp = ht->shead;
 		while (temp->snext != NULL && strcmp(key, temp->snext->key) > 0)
 			temp = temp->snext;
-
 		node->snext = temp->snext;
 		node->sprev = temp;
 		if (temp->snext != NULL)
 			temp->snext->sprev = node;
 		temp->snext = node;
-
 		if (node->snext == NULL)
 			ht->stail = node;
 	}
-
 	return (1);
 }
 
 /**
- * shash_table_get - Retrieves the value associated with a key in a sorted hash table
+ * shash_table_get - Retrieves the value associated
+ *			with a key in a sorted hash table
  * @ht: The sorted hash table
  * @key: The key to search for
  *
