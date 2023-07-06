@@ -1,3 +1,5 @@
+#include "hash_tables.h"
+
 /**
  * key_index - Gives the index of a key in the hash table array
  * @key: The key to be indexed
